@@ -13,27 +13,22 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" />
+        <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">
+        <x-mary-toast />
         <x-banner />
+
 
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
-
             <!-- Page Content -->
-            <main>
+            <main class="p-4 mt-20 sm:ml-64">
                 {{ $slot }}
             </main>
         </div>

@@ -18,6 +18,8 @@ return [
      */
     'prefix' => 'mary-',
 
+
+
     /**
      * Components settings
      */
@@ -27,4 +29,3 @@ return [
         ]
     ]
 ];
-
