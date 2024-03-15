@@ -49,6 +49,23 @@
                                 <img src="{{auth()->user()->profile_photo_url}}" class="rounded-full">
                             </div>
                         </x-slot:trigger>
+                        <div class="mt-3 space-y-1">
+                            <!-- Account Management -->
+
+                            <x-mary-menu-item icon="fas.cog" link="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                                {{ __('Profile') }}
+                            </x-responsive-nav-link>
+
+
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}" x-data>
+                                @csrf
+
+                                <x-mary-menu-item icon="fas.arrow-right-to-bracket" link="{{ route('logout') }}"
+                                               @click.prevent="$root.submit();">
+                                    {{ __('Log Out') }}
+                                </x-responsive-nav-link>
+                            </form>
                     </x-mary-dropdown>
 
                 </div>
