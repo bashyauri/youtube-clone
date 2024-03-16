@@ -52,7 +52,8 @@
                         <div class="mt-3 space-y-1">
                             <!-- Account Management -->
 
-                            <x-mary-menu-item icon="fas.cog" link="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                            <x-mary-menu-item  link="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                                <x-mary-icon name="fas.cog" />
                                 {{ __('Profile') }}
                             </x-responsive-nav-link>
 
@@ -63,6 +64,8 @@
 
                                 <x-mary-menu-item icon="fas.arrow-right-to-bracket" link="{{ route('logout') }}"
                                                @click.prevent="$root.submit();">
+
+
                                     {{ __('Log Out') }}
                                 </x-responsive-nav-link>
                             </form>
