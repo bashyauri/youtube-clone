@@ -16,6 +16,10 @@ class UploadVideo extends Component
 
         $this->modal2 = !$this->modal2;
     }
+    public function handleChunk()
+    {
+        return 0;
+    }
     public function render()
     {
 

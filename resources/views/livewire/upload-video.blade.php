@@ -1,10 +1,22 @@
 <x-mary-modal  wire:model="modal2" title="Upload Video">
     <form x-data="{
-        uploder:null,
+        uploader:null,
         progress:0,
         submit(){
             const file = $refs.file.files[0]
-            console.log(file)
+            if(!file){
+                return
+            }
+            this.uploader = createUpload({
+                file:file,
+                endpoint: '{{route('video.upload')}}',
+                headers: {
+                    'X-CSRF-TOKEN':'{{csrf_token()}}'
+                },
+                method:'post',
+                chunkSize: 10 * 1024, //10mb
+            })
+
         }
     }">
         <div>
