@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Jobs\EncodeVideo;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Livewire\Attributes\On;
@@ -13,6 +15,7 @@ use Illuminate\Support\Str;
 class UploadVideo extends Component
 {
     public bool $modal2 = false;
+    public Video $video;
 
     #[On('toggleModal')]
     public function toggleModal()
@@ -46,6 +49,7 @@ class UploadVideo extends Component
                 'disk' => 'public'
             ])
         ]);
+        EncodeVideo::dispatch($this->video);
     }
     public function render()
     {
