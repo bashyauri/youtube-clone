@@ -13,7 +13,9 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
         "owenvoke/blade-fontawesome": "^2.6",
+        "pbmedia/laravel-ffmpeg": "^8.5",
         "pion/laravel-chunk-upload": "^1.5",
+        "predis/predis": "^2.2",
         "robsontenorio/mary": "^1.25"
     },
     "require-dev": {
