@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Jobs\EncodeVideo;
+use App\Livewire\Forms\UploadVideoForm;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -14,7 +15,10 @@ use Illuminate\Support\Str;
 
 class UploadVideo extends Component
 {
-    public bool $modal2 = false;
+    public bool $modal = false;
+    public UploadVideoForm $form;
+
+    public bool $uploaded = false;
     public Video $video;
 
     #[On('toggleModal')]
@@ -22,21 +26,24 @@ class UploadVideo extends Component
     {
 
 
-        $this->modal2 = !$this->modal2;
+        $this->modal = !$this->modal;
     }
     public function handleChunk(Request $request)
     {
-        $reciever = new FileReceiver(
+        $receiver = new FileReceiver(
             UploadedFile::fake()->createWithContent('file', $request->getContent()),
             $request,
             ContentRangeUploadHandler::class
         );
-        $save = $reciever->receive();
+
+        $save = $receiver->receive();
+
         if ($save->isFinished()) {
             return response()->json([
                 'file' => $save->getFile()->getFilename()
             ]);
         }
+
         $save->handler();
     }
     public function handleSuccess($name, $path)
@@ -49,11 +56,15 @@ class UploadVideo extends Component
                 'disk' => 'public'
             ])
         ]);
+        $this->uploaded = true;
         EncodeVideo::dispatch($this->video);
     }
     public function render()
     {
 
         return view('livewire.upload-video');
+    }
+    public function updateVideo()
+    {
     }
 }

@@ -1,4 +1,4 @@
-<x-mary-modal  wire:model="modal2" title="Upload Video">
+<x-mary-modal  wire:model="modal" title="Upload Video">
     <form x-data="{
         uploader: null,
         progress: 0,
@@ -29,27 +29,43 @@
 
             this.uploader.on('progress', (progress) => {
                 this.progress = progress.detail
+                console.log(progress)
             })
 
             this.uploader.on('success', () => {
                 this.uploader = null
                 this.progress = 100
             })
+
         }
     }">
         <div>
-            <label class="flex w-full h-40 border-2 border-gray-400 border-dashed justify-center items-center"
-            for="video">
+        <label x-show="progress === 0"
+        class="flex w-full h-40 border-2 border-gray-400 border-dashed justify-center items-center"
+        for="video">
                 <span>
-                    <x-mary-icon name="fas.upload" label="Upload Video"> </x-mary-icon>
+                    <x-mary-icon name="fas.upload" label="Upload Video"/>
                 </span>
                 <input type="file" x-on:change.prevent="submit" x-ref="file" class="hidden" id="video">
-            </label>
+        </label>
         </div>
+        <template x-if="uploader">
+            <div class="space-y-1">
+                <x-mary-progress x-bind:value="progress" max="100" />
+            </div>
+        </template>
     </form>
-    <x-slot:actions>
+    @if ($uploaded)
+        <x-mary-form wire:submit="updateVideo">
+            <div class="space-y-2">
+                <x-mary-input label="Title" wire:model="form.title"/>
+                <x-mary-textarea hint="Max 1000 characters" label="Description" wire:model="form.description"/>
+                <x-mary-tags id="tags" label="Tags" wire:model="form.tags"/>
+                {{-- <x-datetime label="Schedule For" wire:model="form.live_at" icon="o-calendar" type="datetime-local"/> --}}
+            </div>
+        </x-form>
 
-    </x-slot:actions>
+    @endif
 
 </x-mary-modal>
 
