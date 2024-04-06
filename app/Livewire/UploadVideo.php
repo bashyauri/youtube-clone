@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Jobs\EncodeVideo;
+use App\Jobs\GenerateThumbnail;
 use App\Livewire\Forms\UploadVideoForm;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -12,9 +13,11 @@ use Livewire\Component;
 use Pion\Laravel\ChunkUpload\Handler\ContentRangeUploadHandler;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class UploadVideo extends Component
 {
+    use WithFileUploads;
     public bool $modal = false;
     public UploadVideoForm $form;
 
@@ -58,6 +61,7 @@ class UploadVideo extends Component
         ]);
         $this->uploaded = true;
         EncodeVideo::dispatch($this->video);
+        GenerateThumbnail::dispatch($this->video);
     }
     public function render()
     {

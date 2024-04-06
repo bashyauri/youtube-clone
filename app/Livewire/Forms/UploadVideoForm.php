@@ -7,12 +7,12 @@ use Livewire\Form;
 
 class UploadVideoForm extends Form
 {
-    #[Validate("required")]
+    #[Validate('required')]
     public string $title;
-    #[Validate("required")]
+    #[Validate('required')]
     public string $description;
-    #[Validate("required")]
+    #[Validate('required')]
     public array $tags;
-    #[Validate("required")]
-    public string  $thumbnailPath;
+    #[Validate('required')]
+    public $thumbnail_path;
 }

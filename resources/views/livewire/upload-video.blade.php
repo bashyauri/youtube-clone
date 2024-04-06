@@ -55,13 +55,25 @@
             </div>
         </template>
     </form>
+
     @if ($uploaded)
         <x-mary-form wire:submit="updateVideo">
+            <div wire:poll>
+                @if (!$video->thumbnail_path)
+                <div class="skeleton w-full h-52"></div>
+            @endif
+            @if ($video->thumbnail_path)
+                <x-mary-file wire:model="form.thumbnail_path" class="w-full" crop-after-change>
+                    <img src="{{ asset('storage'.$video->thumbnail_path) }}" alt="thumbnail" class="w-full rounded-lg"/>
+                </x-file>
+            @endif
+            </div>
             <div class="space-y-2">
                 <x-mary-input label="Title" wire:model="form.title"/>
                 <x-mary-textarea hint="Max 1000 characters" label="Description" wire:model="form.description"/>
                 <x-mary-tags id="tags" label="Tags" wire:model="form.tags"/>
-                {{-- <x-datetime label="Schedule For" wire:model="form.live_at" icon="o-calendar" type="datetime-local"/> --}}
+                {{-- <x-datetime label="Schedule For"
+                 wire:model="form.live_at" icon="o-calendar" type="datetime-local"/> --}}
             </div>
         </x-form>
 
