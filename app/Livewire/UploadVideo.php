@@ -14,10 +14,11 @@ use Pion\Laravel\ChunkUpload\Handler\ContentRangeUploadHandler;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Mary\Traits\Toast;
 
 class UploadVideo extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, Toast;
     public bool $modal = false;
     public UploadVideoForm $form;
 
@@ -70,5 +71,25 @@ class UploadVideo extends Component
     }
     public function updateVideo()
     {
+        $this->form->validate();
+        $thumbnail = $this->form->thumbnail_path->storeAs(
+            'thumbnails',
+            Str::uuid() . '.' . $this->form->thumbnail_path->getClientOriginalExtension(),
+            ['disk' => 'public']
+        );
+        $this->video->update([
+            'title' => $this->form->title,
+            'thumbnail_path' => $thumbnail,
+            'description' => $this->form->description,
+            'tags' => $this->form->tags,
+            'live_at' => $this->form->live_at,
+        ]);
+        $this->modal = false;
+        $this->toast(
+            title: 'Video Updated',
+            description: 'Your video has successfully been uploaded',
+            type: 'success',
+        );
+        return redirect(route('home'));
     }
 }

@@ -72,8 +72,19 @@
                 <x-mary-input label="Title" wire:model="form.title"/>
                 <x-mary-textarea hint="Max 1000 characters" label="Description" wire:model="form.description"/>
                 <x-mary-tags id="tags" label="Tags" wire:model="form.tags"/>
-                {{-- <x-datetime label="Schedule For"
-                 wire:model="form.live_at" icon="o-calendar" type="datetime-local"/> --}}
+                <x-mary-datetime label="Schedule For"
+                 wire:model="form.live_at" icon="o-calendar" type="datetime-local"/>
+            </div>
+            @if ($video->thumbnail_path)
+            <x-slot:actions>
+                <x-mary-button wire:click="updateVideo" label="Publish" class="btn-primary"
+                 spinner="save" type="submit" />
+
+            </x-slot:actions>
+
+            @endif
+            <div>
+
             </div>
         </x-form>
 

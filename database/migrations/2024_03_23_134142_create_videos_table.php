@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->boolean('processed')->default(false);
             $table->timestamp('live_at')->nullable();
+            $table->string('tags')->nullable();
             $table->integer('processed_percentage')->nullable();
             $table->timestamps();
         });
