@@ -32,7 +32,8 @@
                 <div class="flex flex-col space-y-2">
                     <div>
                         <small class="text-sm flex">
-                            <x-mary-icon name="far.eye" label=""/>
+                            <x-mary-icon name="far.eye"
+                            label="{{ Number::abbreviate(views($video)->unique()->count())}}"/>
                             <span class="border-l-2 border-gray-300 ml-2 mr-2"></span>
                             <time datetime="{{ $video->created_at }}" title="{{ $video->created_at }}">
                                 {{ $video->created_at->diffForHumans() }}
