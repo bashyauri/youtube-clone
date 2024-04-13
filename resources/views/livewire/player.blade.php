@@ -1,8 +1,7 @@
 <div>
-    <video id="player"  playsinline controls data-poster="{{ $video->thumbnail_path }}">
-        @foreach ($video->formats as $format)
-        <source src="storage/{{$format->file_path}}" type="video/mp4" size="{{$format->quality}}">
-
+    <video id="player" playsinline controls data-poster="{{ $video->thumbnail_path }}">
+        @foreach($video->formats as $format)
+            <source src="/{{ $format->file_path }}" type="video/mp4" size="{{ $format->quality }}"/>
         @endforeach
     </video>
 </div>
