@@ -21,7 +21,7 @@
                         <img src="{{ $video->user->profile_photo_url }}" alt="profile" class="rounded-full w-10"/>
 
                     </div>
-                    <a href="#" wire:navigate class="flex flex-col space-y-1.5">
+                    <a href="{{route('video.show',$video)}}" wire:navigate class="flex flex-col space-y-1.5">
                         <h2 class="text-2xl flex-wrap">
                             {{ $video->title }}
                         </h2>

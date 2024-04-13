@@ -5,11 +5,12 @@ namespace App\Livewire;
 use App\Models\Video;
 use Livewire\Component;
 
-class Player extends Component
+class VideoPage extends Component
 {
     public Video $video;
+
     public function render()
     {
-        return view('livewire.player');
+        return view('livewire.video-page');
     }
 }
